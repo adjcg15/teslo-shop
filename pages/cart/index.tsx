@@ -24,7 +24,7 @@ const CartPage = () => {
                             <OrderSummary />
 
                             <Box sx={{ mt: 3 }}>
-                                <Button color='secondary' className='circular-btn' fullWidth>
+                                <Button size='medium' color='secondary' className='circular-btn' fullWidth>
                                     Checkout
                                 </Button>
                             </Box>
