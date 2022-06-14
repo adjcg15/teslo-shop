@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react';
+import { GetServerSideProps } from 'next';
 import NextLink from 'next/link';
+import { getSession, signIn } from 'next-auth/react';
 
 import { Box, Button, Chip, Grid, Link, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
@@ -7,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import { AuthLayout } from '../../components/layouts';
 import { ErrorOutline } from '@mui/icons-material';
 import { validations } from '../../utils';
-import { tesloApi } from '../../api';
 import { useRouter } from 'next/router';
 import { AuthContext } from '../../context';
 
@@ -36,7 +37,9 @@ const RegisterPage = () => {
             return;
         }
 
-        router.replace('/');
+        await signIn('credentials', { email, password });
+        // const destination = router.query.p?.toString() || '/';
+        // router.replace(destination);
     }
     return (
         <AuthLayout title='Crear cuenta'>
@@ -114,7 +117,7 @@ const RegisterPage = () => {
                         </Grid>
 
                         <Grid item xs={12} display='flex' justifyContent='flex-end'>
-                            <NextLink href='/auth/login' passHref>
+                            <NextLink href={router.query.p ? `/auth/login?p=${router.query.p}` : '/auth/login'} passHref>
                                 <Link underline='always'>
                                     ¿Ya tienes una cuenta?
                                 </Link>
@@ -125,6 +128,26 @@ const RegisterPage = () => {
             </form>
         </AuthLayout>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+    const session = await getSession({ req });
+    const { p = '/' } = query;
+
+    if(session) {
+        return {
+            redirect: {
+                destination: p.toString(),
+                permanent: false
+            }
+        }
+    }
+
+    return {
+        props: {
+            
+        }
+    }
 }
 
 export default RegisterPage;
