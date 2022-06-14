@@ -1,9 +1,11 @@
 import React, { FC, useEffect, useReducer } from 'react';
 
 import Cookie from 'js-cookie';
+import axios, { AxiosError } from 'axios';
 
-import { ICartProduct } from '../../interfaces';
+import { ICartProduct, IOrder, ShippingAddress } from '../../interfaces';
 import { CartContext, cartReducer } from './';
+import { tesloApi } from '../../api';
 
 export interface CartState {
     isLoaded: boolean;
@@ -13,17 +15,6 @@ export interface CartState {
     tax: number;
     total: number;
     shippingAddress?: ShippingAddress;
-}
-
-export interface ShippingAddress {
-    firstName: string;
-    lastName : string;
-    address  : string;
-    address2?: string;
-    zip      : string;
-    city     : string;
-    country  : string;
-    phone    : string;
 }
 
 const CART_INITIAL_STATE: CartState = {
@@ -153,13 +144,57 @@ export const CartProvider: FC<Props> = ({ children }) => {
         });
     }
 
+    const createOrder = async():Promise<{ hasError: boolean; message: string; }> => {
+        if(!state.shippingAddress) throw new Error('No hay dirección de entrega');
+
+        const body: IOrder = {
+            orderItems: state.cart.map(p => ({
+                ...p,
+                size: p.size!
+            })),
+            shippingAddress: state.shippingAddress,
+            numberOfItems: state.numberOfItems,
+            subTotal: state.subTotal,
+            tax: state.tax,
+            total: state.total,
+            isPaid: false
+        }
+
+        try {
+            const { data } = await tesloApi.post<IOrder>('/orders', body);
+            
+            dispatch({ type: '[Cart] - Order complete' });
+            Cookie.set('cart', JSON.stringify([]));
+
+            return {
+                hasError: false,
+                message: data._id!
+            }
+        } catch (error) {
+            if(axios.isAxiosError(error)) {
+                const axiosError = error as AxiosError<{ message: string }>;
+                
+                return {
+                    hasError: true,
+                    message: axiosError.response?.data.message || 'Error en la petición'
+                }
+            }
+
+            return {
+                hasError: true,
+                message: 'Error inesperado, hable con el administrador'
+            }
+        }
+    }
+
     return (
         <CartContext.Provider value={{
             ...state,
             addProductToCart,
             updateCardQuantity,
             removeCartProduct,
-            updateAddress
+            updateAddress,
+            createOrder
         }}>
             { children }
         </CartContext.Provider>

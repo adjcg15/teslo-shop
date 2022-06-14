@@ -1,12 +1,12 @@
 import { ISize } from './';
 
-export interface ICartProduct{
+export interface ICartProduct {
     _id: string;
+    title: string;
+    size?: ISize;
+    quantity: number;
+    slug: string;
     image: string;
     price: number;
-    size?: ISize;
-    slug: string;
-    title: string;
     gender: 'men'|'women'|'kid'|'unisex';
-    quantity: number;
 }

@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Box, Button, FormControl, Grid, MenuItem, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import Cookies from 'js-cookie';
 
@@ -211,31 +210,31 @@ const AddressPage = () => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-    const { token = '' } = req.cookies;
-    let isValidToken = false;
+// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+//     const { token = '' } = req.cookies;
+//     let isValidToken = false;
 
-    try {
-        await jwt.isValidToken(token);
-        isValidToken = true;
-    } catch (error) {
-        isValidToken = false;
-    }
+//     try {
+//         await jwt.isValidToken(token);
+//         isValidToken = true;
+//     } catch (error) {
+//         isValidToken = false;
+//     }
 
-    if(!isValidToken) {
-        return {
-            redirect: {
-                destination: '/auth/login?p=/checkout/address',
-                permanent: false
-            }
-        }
-    }
+//     if(!isValidToken) {
+//         return {
+//             redirect: {
+//                 destination: '/auth/login?p=/checkout/address',
+//                 permanent: false
+//             }
+//         }
+//     }
 
-    return {
-        props: {
+//     return {
+//         props: {
             
-        }
-    }
-}
+//         }
+//     }
+// }
 
 export default AddressPage
