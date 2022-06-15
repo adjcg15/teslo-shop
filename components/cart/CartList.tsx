@@ -12,14 +12,14 @@ interface Props {
     products?: IOrderItem[];
 }
 
-export const CartList:FC<Props> = ({ editable = false, products = [] }) => {
+export const CartList:FC<Props> = ({ editable = false, products }) => {
     const { cart, updateCardQuantity, removeCartProduct } = useContext(CartContext);
 
     const onNewQuantityValue = (product: ICartProduct, newQuantityValue: number) => {
         product.quantity = newQuantityValue;
         updateCardQuantity(product);
     }
-
+    
     const productsToShow = products ? products : cart;
 
     return (
