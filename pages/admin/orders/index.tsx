@@ -34,7 +34,7 @@ const columns:GridColDef[] = [
     },
 ]
 
-const Orders = () => {
+const OrdersPage = () => {
     const { data, error } = useSWR<IOrder[]>('/api/admin/orders');
     
     if(!error && !data) {
@@ -76,4 +76,4 @@ const Orders = () => {
     )
 }
 
-export default Orders
+export default OrdersPage;

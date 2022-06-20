@@ -95,7 +95,7 @@ export const CartProvider: FC<Props> = ({ children }) => {
     const addProductToCart = (product: ICartProduct) => {
         const productInCart = state.cart.some(prod => prod._id === product._id && prod.size === product.size);
 
-        if(!productInCart) return dispatch({ 
+        if(!productInCart) return dispatch({
             type: '[Cart] - Update products in cart', 
             payload: [...state.cart, product]
         });

@@ -1,3 +1,5 @@
+import { IProduct } from '../interfaces';
+
 export const isValidEmail = (email: string): boolean => {
     const match = String(email)
         .toLowerCase()

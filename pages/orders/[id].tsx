@@ -201,6 +201,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
         }
     }
 
+    order.orderItems = order.orderItems.map(item => {
+        const newImage = item.image.includes('http') ? item.image : `${process.env.HOST_NAME}products/${item.image}`;
+        return {...item, image: newImage};
+    });
+
     return {
         props: {
             order

@@ -31,7 +31,7 @@ export const SideMenu = () => {
             sx={{ backdropFilter: 'blur(2px)', transition: 'all 0.5s ease' }}
             onClose={ toggleSideMenu }
         >
-            <Box>
+            <Box sx={{ width: 240 }}>
                 <List>
                     <ListItem>
                         <Input
@@ -57,12 +57,12 @@ export const SideMenu = () => {
                     {
                         isLoggedIn && (
                             <>
-                                <ListItem button>
+                                {/* <ListItem button>
                                     <ListItemIcon>
                                         <AccountCircleOutlined/>
                                     </ListItemIcon>
                                     <ListItemText primary={'Perfil'} />
-                                </ListItem>
+                                </ListItem> */}
 
                                 <ListItem 
                                     button 
@@ -152,7 +152,10 @@ export const SideMenu = () => {
                                     </ListItemIcon>
                                     <ListItemText primary={'Dashboard'} />
                                 </ListItem>
-                                <ListItem button>
+                                <ListItem 
+                                    button
+                                    onClick={ () => navigateTo(`/admin/products`) }
+                                >
                                     <ListItemIcon>
                                         <CategoryOutlined/>
                                     </ListItemIcon>

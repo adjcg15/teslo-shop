@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 
-import { AppBar, Badge, Box, Button, IconButton, Input, InputAdornment, Link, Toolbar, Typography } from '@mui/material';
+import { AppBar, Badge, Box, Button, createTheme, IconButton, Input, InputAdornment, Link, Toolbar, Typography } from '@mui/material';
 import { ClearOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material';
 import { CartContext, UiContext } from '../../context';
 
@@ -37,17 +37,38 @@ export const Navbar = () => {
                 >
                     <NextLink href='/category/men' passHref>
                         <Link>
-                            <Button color={ asPath === '/category/men' ? 'primary' : 'info'}>Hombres</Button>
+                            <Button 
+                                color={ asPath === '/category/men' ? 'primary' : 'info'}
+                                sx={{ ':hover': {
+                                    bgcolor: 'primary.main'
+                                }}}
+                            >
+                                Hombres
+                            </Button>
                         </Link>
                     </NextLink>
                     <NextLink href='/category/women' passHref>
                         <Link>
-                            <Button color={ asPath === '/category/women' ? 'primary' : 'info' }>Mujeres</Button>
+                            <Button 
+                                color={ asPath === '/category/women' ? 'primary' : 'info' }
+                                sx={{ ':hover': {
+                                    bgcolor: 'primary.main'
+                                }}}
+                            >
+                                Mujeres
+                            </Button>
                         </Link>
                     </NextLink>
                     <NextLink href='/category/kid' passHref>
                         <Link>
-                            <Button color={ asPath === '/category/kid' ? 'primary' : 'info' }>Niños</Button>
+                            <Button 
+                                color={ asPath === '/category/kid' ? 'primary' : 'info' }
+                                sx={{ ':hover': {
+                                    bgcolor: 'primary.main'
+                                }}}
+                            >
+                                Niños
+                            </Button>
                         </Link>
                     </NextLink>
                 </Box>
@@ -115,7 +136,7 @@ export const Navbar = () => {
                     </Link>
                 </NextLink>
 
-                <Button sx={{ ml: 1 }} onClick={ toggleSideMenu }>
+                <Button sx={{ ml: 1, ':hover': { bgcolor: 'primary.main'}}} onClick={ toggleSideMenu } >
                     Menú
                 </Button>
             </Toolbar>

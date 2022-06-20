@@ -19,6 +19,7 @@ export const SizeSelector:FC<Props> = ({ selectedSize, sizes, onSelectedSize }) 
                         size='small'
                         color={ selectedSize === size ? 'primary' : 'info' }
                         onClick={ () => onSelectedSize(size) }
+                        sx={{':hover': { bgcolor: 'primary.main'}}}
                     >
                         { size }
                     </Button>

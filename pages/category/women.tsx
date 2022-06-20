@@ -15,8 +15,8 @@ const WomenPage: NextPage = () => {
             title='TesloShop - Mujer'
             pageDescription='Encuentra los mejores productos de Teslo para ellas'
         >
-            <Typography variant='h1'>Mujeres</Typography>
-            <Typography variant='h2' sx={{ mb: 1 }}>Productos para ellas</Typography>
+            <Typography variant='h1' sx={{ mb: 4 }}>Mujeres</Typography>
+            <Typography variant='h2' component='h2' sx={{ mb: 2, fontSize: 23 }}>Prendas para ellas</Typography>
 
             {
                 isLoading

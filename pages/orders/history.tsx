@@ -1,13 +1,14 @@
 import { GetServerSideProps, NextPage } from 'next';
 import NextLink from 'next/link';
 
-import { Chip, Grid, Link, Typography } from '@mui/material';
+import { Box, Chip, Grid, Link, Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { getSession } from 'next-auth/react';
 
 import { ShopLayout } from '../../components/layouts';
 import { dbOrders } from '../../database';
 import { IOrder } from '../../interfaces';
+import { AddShoppingCartOutlined } from '@mui/icons-material';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 100 },
@@ -47,7 +48,6 @@ interface Props {
 }
 
 const HistoryPage:NextPage<Props> = ({ orders }) => {
-    console.log(orders);
     const rows = orders.map((order, index) => ({
         id: index + 1,
         paid: order.isPaid,
@@ -60,18 +60,38 @@ const HistoryPage:NextPage<Props> = ({ orders }) => {
             title='Historial de órdenes' 
             pageDescription='Historial de órdenes del cliente'
         >
-            <Typography variant='h1' component='h1'>Historial de órdenes</Typography>
+            {
+                orders.length === 0
+                ? (
+                    <>
+                        <Box display='flex' flexDirection='column' height='calc(100vh - 200px)' justifyContent='center' alignItems='center'>
+                            <Typography variant='h5' sx={{ mb: 2 }}>No hay órdenes aún</Typography>
+                            <NextLink href='/' passHref>
+                                <Link display='flex' flexDirection='column' alignItems='center' sx={{ ':hover': { color: 'secondary.main' }}}>
+                                    <AddShoppingCartOutlined sx={{ fontSize: '60px' }} />
+                                    <Typography>Comprar</Typography>
+                                </Link>
+                            </NextLink>
+                        </Box>
+                    </>
+                )
+                : (
+                    <>
+                        <Typography variant='h1' component='h1'>Historial de órdenes</Typography>
 
-            <Grid container className='fadeIn' sx={{ mt: 2 }}>
-                <Grid item xs={12} sx={{ height: '650px', width: '100%' }}>
-                    <DataGrid 
-                        rows={ rows }
-                        columns={ columns }
-                        pageSize={ 10 }
-                        rowsPerPageOptions={ [10] }
-                    />
-                </Grid>
-            </Grid>
+                        <Grid container className='fadeIn' sx={{ mt: 2 }}>
+                            <Grid item xs={12} sx={{ height: '650px', width: '100%' }}>
+                                <DataGrid 
+                                    rows={ rows }
+                                    columns={ columns }
+                                    pageSize={ 10 }
+                                    rowsPerPageOptions={ [10] }
+                                />
+                            </Grid>
+                        </Grid>
+                    </>
+                )
+            }
         </ShopLayout>
     )
 }

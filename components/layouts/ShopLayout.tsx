@@ -35,16 +35,16 @@ export const ShopLayout:FC<Props> = ({ children, title, pageDescription, imageFu
             <main style={{
                 margin: '80px auto',
                 maxWidth: '1440px',
-                padding: '0px 30px'
+                padding: '0px min(4%, 50px)'
             }}>
                 { children }
             </main>
 
             {/* Todo: Footer */}
 
-            <footer>
-                {/* TOdo: Custom footer */}
-            </footer>
+            {/* <footer>
+                Todo: Custom footer
+            </footer> */}
         </>
     )
 }

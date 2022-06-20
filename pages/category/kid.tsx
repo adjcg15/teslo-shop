@@ -15,8 +15,8 @@ const KidPage: NextPage = () => {
             title='TesloShop - Niños'
             pageDescription='Encuentra los mejores productos de Teslo para niños'
         >
-            <Typography variant='h1'>Niños</Typography>
-            <Typography variant='h2' sx={{ mb: 1 }}>Productos para los pequeños</Typography>
+            <Typography variant='h1' sx={{ mb: 4 }}>Niños</Typography>
+            <Typography variant='h2' component='h2' sx={{ mb: 2, fontSize: 23 }}>Productos para los pequeños</Typography>
 
             {
                 isLoading

@@ -1,6 +1,5 @@
 import { createTheme } from '@mui/material/styles';
 
-
 export const lightTheme = createTheme({
     palette: {
         mode: 'light',
@@ -20,6 +19,7 @@ export const lightTheme = createTheme({
                 underline: 'none',
             },
         },
+
         MuiAppBar: {
             defaultProps: {
                 elevation: 0,
@@ -50,7 +50,6 @@ export const lightTheme = createTheme({
             }
         },
 
-
         MuiButton: {
             defaultProps: {
                 variant: 'contained',
@@ -72,15 +71,14 @@ export const lightTheme = createTheme({
             }
         },
 
-
         MuiCard: {
             defaultProps: {
                 elevation: 0
             },
             styleOverrides: {
                 root: {
+                    borderRadius: 0,
                     boxShadow: '0px 5px 5px rgba(0,0,0,0.05)',
-                    borderRadius: '10px',
                 }
             }
         }

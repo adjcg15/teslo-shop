@@ -14,16 +14,14 @@ const HomePage: NextPage = () => {
             title='TesloShop - Home'
             pageDescription='Encuentra los mejores productos de Teslo'
         >
-            <Typography variant='h1'>Tienda</Typography>
-            <Typography variant='h2' sx={{ mb: 1 }}>Todos los productos</Typography>
+            <Typography variant='h1' sx={{ mb: 4 }}>Tienda</Typography>
+            <Typography variant='h2' component='h2' sx={{ mb: 2, fontSize: 23 }}>Todos los productos</Typography>
 
             {
                 isLoading
                 ? <FullScreenLoading />
                 : <ProductList products={ products }/>
             }
-
-            
         </ShopLayout>
     )
 }
