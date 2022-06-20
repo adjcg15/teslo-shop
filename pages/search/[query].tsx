@@ -19,11 +19,11 @@ const SearchPage: NextPage<Props> = ({ products, foundProducts, query }) => {
             title='TesloShop - Search'
             pageDescription='Búsqueda personalizada'
         >
-            <Typography variant='h1'>Búsqueda de producto</Typography>
+            <Typography variant='h1'>Resultados de búsqueda</Typography>
             {
                 foundProducts 
                 ? <Typography color='secondary' variant='h2' sx={{ mb: 1 }} textTransform='capitalize'>{ query }</Typography>
-                : <Typography  variant='h2' sx={{ mt: 1 }}>El término <Typography variant='h2' component='span' color='secondary'>{ query }</Typography> no arrojó coincidencias</Typography>
+                : <Typography  variant='h2' sx={{ my: 2 }}>El término <Typography variant='h2' component='span' color='secondary'>{ query }</Typography> no arrojó coincidencias, pero tal vez te puedan interesar:</Typography>
             }
             <ProductList products={ products }/>
         </ShopLayout>

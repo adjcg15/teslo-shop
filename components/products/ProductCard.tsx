@@ -54,7 +54,6 @@ export const ProductCard:FC<Props> = ({ product }) => {
                 onMouseLeave={() => setIsHovered(false)}
                 sx={{ position: 'relative' }}
             >
-
                 <NextLink href={`/product/${ product.slug }`} passHref prefetch={ false }>
                     <Link>
                         <CardActionArea>
@@ -88,11 +87,11 @@ export const ProductCard:FC<Props> = ({ product }) => {
                                 left: 0, 
                                 width: '100%', 
                                 bgcolor: '#ffffff',
-                                display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'center',
                                 padding: '0 16px 0 !important',
-                                height: '80px'
+                                height: '80px',
+                                display: { xs: 'none', md: 'flex' }
                             }}
                             onMouseEnter={() => setQuickAddHovered(true)}
                             onMouseLeave={() => setQuickAddHovered(false)}
