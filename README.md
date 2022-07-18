@@ -12,7 +12,7 @@ Renombrar el archivo __.env.template__ a __.env__
 MONGO_URL=mongodb://localhost:27017/teslodb
 ```
 
-*Reconstruir los módulos de node y levantar el servidor local
+* Reconstruir los módulos de node y levantar el servidor local
 ```
 npm install
 npm run dev
